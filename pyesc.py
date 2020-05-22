@@ -55,7 +55,7 @@ class scraper():
         try:
 
             response=get(url=url_site,allow_redirects=True,verify=True,headers={"User-Agent":self.user_agent(),"Accept":"*/*"})
-            email=findall("[\w\.-]+@[\w\.-]+",response.content)
+            email=findall("[\w\.-]+@[\w\.-]+",response.text)
             print("["+green+"+"+normal_color+"] "+blue+"Content is obtained from URL"+normal_color+" : "+green+url_site+normal_color)
 
             for x in email:
@@ -77,7 +77,7 @@ class scraper():
                     if x.split("/")[0] == "http:" or x.split("/")[0] == "https:":
 
                         Thread(target=self.get_email,args=(x,)).start()
-                        sleep(0.3)
+                        sleep(0.1)
 
             elif argv[1].split("/")[0] == "http:" or argv[1].split("/")[0] == "https:":
 
